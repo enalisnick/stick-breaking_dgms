@@ -11,7 +11,7 @@ import theano.tensor as T
 from models.ss_Gauss_DGM import SS_Gaussian_DGM
 from models.neural_net.activation_fns import Sigmoid, Identity, Softmax
 from models.neural_net.loss_fns import *
-from utils.load_data import load_mnist, load_mnist_w_rotations, load_imdb, load_svhn_pca
+from utils.load_data import load_mnist, load_mnist_w_rotations, load_svhn_pca
 from opt_fns import get_adam_updates
 
 ### Train & Evaluate ###

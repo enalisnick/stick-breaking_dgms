@@ -5,7 +5,7 @@ import theano
 
 from models.neural_net.layers import HiddenLayer, ResidualHiddenLayer
 from models.neural_net.activation_fns import ReLU, Sigmoid, Identity
-from training_scripts.train_stickBreaking_ssDGM import train_and_eval_stickBreaking_ss_dgm
+from train_scripts.train_stickBreaking_ssDGM import train_and_eval_stickBreaking_ss_dgm
 from utils.utils import mkdirs
 
 def build_argparser():
@@ -13,7 +13,7 @@ def build_argparser():
     p = argparse.ArgumentParser(description=DESCRIPTION)
 
     dataset = p.add_argument_group("Experiment options")
-    dataset.add_argument('--dataset', default="svhn_pca", choices=["mnist", "mnist_plus_rot", "svhn_pca"],
+    dataset.add_argument('--dataset', default="mnist", choices=["mnist", "mnist_plus_rot", "svhn_pca"],
                          help="either 'mnist' or 'mnist_plus_rot' or 'svhn_pca'. Default:%(default)s")
     dataset.add_argument('--label-drop-percentage', type=float, default=.90,
                          help='percentage of labels to drop from training data. Default:%(default)s')
@@ -21,7 +21,7 @@ def build_argparser():
     model = p.add_argument_group("Model options")
     model.add_argument('--hidden-type', default="traditional", choices=["traditional", "residual"],
                          help='either traditional or residual. Default:%(default)s')
-    model.add_argument('--nb-hidden-layers', type=int, default=2,
+    model.add_argument('--nb-hidden-layers', type=int, default=1,
                          help='number of hidden layers in the encoder/decoder. Default:%(default)s')
     model.add_argument('--skip', type=int, default=0,
                          help='number of hidden layers that have skip connections. Default:%(default)s')
@@ -31,7 +31,7 @@ def build_argparser():
                          help='either relu or sigmoid. Default:%(default)s')
     model.add_argument('--latent-size', type=int, default=50,
                          help='dimensionality of latent variable. Default:%(default)s')
-    model.add_argument('--supervised-weight', type=float, default=.45,
+    model.add_argument('--supervised-weight', type=float, default=.375,
                          help='weight on supervised portion of gradient. Default:%(default)s')
     model.add_argument('--alpha0', type=float, default=5.,
                          help="the Beta prior's concentration parameter: v ~ Beta(1, alpha0). The larger the alpha0, the more latent variables. Default:%(default)s")
@@ -41,7 +41,7 @@ def build_argparser():
                           help='size of the batch to use when training the model. Default: %(default)s.')
     training.add_argument('--max-epoch', type=int, metavar='N', default=2000,
                           help='train for a maximum of N epochs. Default: %(default)s')
-    training.add_argument('--lookahead', type=int, metavar='K', default=20,
+    training.add_argument('--lookahead', type=int, metavar='K', default=30,
                           help='use early stopping with a lookahead of K. Default: %(default)s')
     # training.add_argument('--clip-gradient', type=float,
     #                       help='if provided, gradient norms will be clipped to this value (if it exceeds it).')
