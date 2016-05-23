@@ -206,7 +206,7 @@ def train_and_eval_stickBreaking_ss_dgm(
         avg_training_sup_kl_tracker /= (minibatch_index+1)
         avg_training_unsup_kl_tracker /= (minibatch_index+1)
 
-        # Compute validation error --- sample multiple times to simulate posterior predictive dis.
+        # Compute validation error 
         valid_nb_errors = sum([valid_model(i) for i in xrange(n_valid_batches)])
         valid_error = valid_nb_errors / float(valid_set_size)
 
@@ -235,7 +235,7 @@ def train_and_eval_stickBreaking_ss_dgm(
     for param, best_param in zip(model.params, best_params):
         param.set_value(best_param)
 
-    # Compute test error on best epoch --- sample multiple times to simulate posterior predictive distribution
+    # Compute test error on best epoch 
     test_nb_errors = sum([test_model(i) for i in xrange(n_test_batches)])
     test_error = test_nb_errors / float(test_set_size)
 
