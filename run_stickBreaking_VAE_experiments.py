@@ -5,7 +5,7 @@ import theano
 
 from models.neural_net.layers import HiddenLayer, ResidualHiddenLayer
 from models.neural_net.activation_fns import ReLU, Sigmoid, Identity
-from train_scripts.train_gauss_ssDGM import train_and_eval_stickBreaking_vae
+from train_scripts.train_stickBreaking_VAE import train_and_eval_stickBreaking_vae
 from utils.utils import mkdirs
 
 def build_argparser():
@@ -29,7 +29,7 @@ def build_argparser():
                          help='either relu or sigmoid. Default:%(default)s')
     model.add_argument('--truncation-level', type=int, default=50,
                          help='Maximum dimensionality of latent variable. Default:%(default)s')
-     model.add_argument('--alpha0', type=float, default=5.,
+    model.add_argument('--alpha0', type=float, default=5.,
                          help="the Beta prior's concentration parameter: v ~ Beta(1, alpha0). The larger the alpha0, the more latent variables. Default:%(default)s")
 
     training = p.add_argument_group("Training options")
